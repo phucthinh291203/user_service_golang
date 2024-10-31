@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package auth;
+import "google/protobuf/empty.proto";
+option go_package = "user_service/protos";
+
+service TeacherService {
+    rpc CreateNewTeacher (CreateTeacherRequest) returns (CreateTeacherResponse);
+    rpc GetAllTeacher (google.protobuf.Empty) returns (GetAllTeacherResponse);
+    rpc UpdateTeacher(UpdateTeacherRequest) returns (UpdateTeacherResponse);
+    rpc DeleteTeacher (DeleteTeacherRequest) returns (DeleteTeacherResponse);
+}
+
+
+message Teacher {
+        string ID                 = 1;    
+        string TeacherName        = 2;     
+        repeated string ClassID   = 3;
+        repeated string SubjectID = 4;
+}
+    
+message CreateTeacherRequest {
+        string ID          = 1;    
+        string Email       = 2;                   
+        string PhoneNumber = 3;             
+        string Username    = 4;         
+        string Password    = 5;     
+        string TeacherName = 6;   
+}
+
+message CreateTeacherResponse {
+        string message = 1;
+        string token = 2;
+}
+
+
+message GetAllTeacherResponse {
+        string message = 1;
+        repeated Teacher teachers = 2;
+}
+
+// Update 
+
+message UpdateTeacherRequest{
+    string id = 1;
+    string name = 2;
+}
+
+message UpdateTeacherResponse {
+    string message = 1;
+}
+
+
+// Delete 
+message DeleteTeacherRequest{
+    string id = 1;
+}
+
+message DeleteTeacherResponse{
+    string message = 1;
+}
+
+
+
